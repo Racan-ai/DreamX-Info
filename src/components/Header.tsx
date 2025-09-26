@@ -33,7 +33,7 @@ export function Header() {
                   style={{ borderRadius: "1px" }}
                 >
                   <ImageWithFallback
-                    src="https://i.postimg.cc/dtwYq2Kw/image-89.png"
+                    src="https://i.postimg.cc/sx24cHZb/image-89.png"
                     alt="Dreamxworld Logo"
                     className="w-full h-full object-cover"
                   />
