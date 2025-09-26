@@ -93,7 +93,7 @@ export function About() {
               whileHover={{ scale: 1.02 }}
             >
               <ImageWithFallback
-                src="https://i.postimg.cc/yYpMhFcc/image.png"
+                src="https://i.postimg.cc/28BQTZKx/Generated-Image-September-26-2025-9-44-PM.png"
                 alt="Happy businessman working"
                 className="w-full h-48 lg:h-56 object-cover"
               />
