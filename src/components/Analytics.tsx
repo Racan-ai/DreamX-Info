@@ -74,7 +74,8 @@ export function Analytics() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-4 sm:p-6 lg:p-8 w-full max-w-2xl mx-auto border border-gray-800"
+          className="bg-gradient-to-br from-gray-900 to-black p-4 sm:p-6 lg:p-8 w-full max-w-2xl mx-auto border border-gray-800"
+          style={{ borderRadius: '1px' }}
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -82,7 +83,7 @@ export function Analytics() {
         >
           <div className="mb-6 sm:mb-8">
             <motion.p
-              className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3"
+              className="text-xs font-medium text-white uppercase tracking-wider mb-3"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -92,7 +93,7 @@ export function Analytics() {
               Statistics
             </motion.p>
             <motion.h2
-              className="text-base sm:text-lg font-medium text-gray-300 mb-4 sm:mb-6"
+              className="text-base sm:text-lg font-medium text-white mb-4 sm:mb-6"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -142,7 +143,7 @@ export function Analytics() {
                       x="25"
                       y={205 - value * 2}
                       textAnchor="end"
-                      className="text-[10px] sm:text-xs fill-gray-600"
+                      className="text-[10px] sm:text-xs fill-white"
                       style={{ fontFamily: "Outfit, sans-serif" }}
                     >
                       {value}%
@@ -207,10 +208,10 @@ export function Analytics() {
                       <motion.circle
                         cx={point.x}
                         cy={point.y}
-                        r={isLastPoint ? "8" : "6"}
+                        r={isLastPoint ? "4" : "3"}
                         fill="white"
                         stroke="url(#lineGradient)"
-                        strokeWidth="3"
+                        strokeWidth="2"
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{
@@ -277,7 +278,7 @@ export function Analytics() {
                     x={point.x}
                     y="215"
                     textAnchor="middle"
-                    className="text-[10px] sm:text-xs fill-gray-500"
+                    className="text-[10px] sm:text-xs fill-white"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
