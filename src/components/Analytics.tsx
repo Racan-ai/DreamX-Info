@@ -7,6 +7,8 @@ export function Analytics() {
   const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
+  const growth = Math.round(((98 - 12) / 12) * 100);
+
   useEffect(() => {
     if (pathRef.current) {
       const length = pathRef.current.getTotalLength();
@@ -31,14 +33,14 @@ export function Analytics() {
   }, []);
 
   const dataPoints = [
-    { month: "MAR", value: 15, revenue: 12, x: 40, y: 180 },
-    { month: "APR", value: 25, revenue: 18, x: 90, y: 160 },
-    { month: "MAY", value: 30, revenue: 25, x: 140, y: 150 },
-    { month: "JUN", value: 45, revenue: 35, x: 190, y: 120 },
-    { month: "JUL", value: 55, revenue: 45, x: 240, y: 100 },
-    { month: "AUG", value: 65, revenue: 65, x: 290, y: 80 },
-    { month: "SEP", value: 70, revenue: 90, x: 340, y: 60 },
-    { month: "OCT", value: 80, revenue: 98, x: 390, y: 40 },
+    { month: "MAR", revenue: 12, x: 40, y: 178 },
+    { month: "APR", revenue: 18, x: 90, y: 168 },
+    { month: "MAY", revenue: 25, x: 140, y: 155 },
+    { month: "JUN", revenue: 35, x: 190, y: 137 },
+    { month: "JUL", revenue: 45, x: 240, y: 119 },
+    { month: "AUG", revenue: 65, x: 290, y: 83 },
+    { month: "SEP", revenue: 90, x: 340, y: 38 },
+    { month: "OCT", revenue: 98, x: 390, y: 24 },
   ];
 
   const generatePath = () => {
@@ -58,15 +60,6 @@ export function Analytics() {
 
   const linePath = generatePath();
 
-  const generateAreaPath = () => {
-    const basePath = generatePath();
-    const lastPoint = dataPoints[dataPoints.length - 1];
-    const firstPoint = dataPoints[0];
-    return `${basePath} L ${lastPoint.x} 200 L ${firstPoint.x} 200 Z`;
-  };
-
-  const areaPath = generateAreaPath();
-
   return (
     <section
       className="py-8 sm:py-12 lg:py-16 bg-black"
@@ -82,36 +75,33 @@ export function Analytics() {
           viewport={{ once: true }}
         >
           <div className="mb-6 sm:mb-8">
-            <motion.p
-              className="text-xs font-medium text-white uppercase tracking-wider mb-3"
+            <motion.span
+              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-900/20 text-orange-400 mb-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
-              style={{ fontFamily: "Outfit, sans-serif" }}
             >
-              Statistics
-            </motion.p>
+              Success Story
+            </motion.span>
             <motion.h2
-              className="text-base sm:text-lg font-medium text-white mb-4 sm:mb-6"
+              className="text-xl sm:text-2xl font-bold text-white mb-2"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              style={{ fontFamily: "Outfit, sans-serif" }}
             >
-              Total accumulated profit
+              My journey to <span className="text-orange-400">₹{animatedRevenue}K</span>
             </motion.h2>
-            <motion.div
-              className="text-2xl sm:text-3xl font-bold text-white mb-1"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
+            <motion.p
+              className="text-gray-400 text-sm sm:text-base"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
-              style={{ fontFamily: "IBM Plex Mono, monospace" }}
             >
-              ₹{animatedRevenue}K
-            </motion.div>
+              Total accumulated profit designing websites on twitter
+            </motion.p>
           </div>
 
           <div className="relative w-full">
@@ -123,7 +113,7 @@ export function Analytics() {
                 className="overflow-visible"
                 preserveAspectRatio="xMidYMid meet"
               >
-                {[0, 20, 40, 60, 80].map((value, index) => (
+                {[0, 25, 50, 75, 100].map((value, index) => (
                   <motion.g
                     key={value}
                     initial={{ opacity: 0 }}
@@ -133,64 +123,68 @@ export function Analytics() {
                   >
                     <line
                       x1="35"
-                      y1={200 - value * 2}
+                      y1={200 - value * 1.8}
                       x2="400"
-                      y2={200 - value * 2}
-                      stroke="#1f2937"
+                      y2={200 - value * 1.8}
+                      stroke="#374151"
                       strokeWidth="1"
                     />
                     <text
                       x="25"
-                      y={205 - value * 2}
+                      y={205 - value * 1.8}
                       textAnchor="end"
-                      className="text-[10px] sm:text-xs fill-white"
+                      className="text-[10px] sm:text-xs fill-gray-400"
                       style={{ fontFamily: "Outfit, sans-serif" }}
                     >
-                      {value}%
+                      {value}K
                     </text>
                   </motion.g>
                 ))}
 
-                <defs>
-                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#3b82f6" />
-                    <stop offset="30%" stopColor="#06b6d4" />
-                    <stop offset="60%" stopColor="#10b981" />
-                    <stop offset="100%" stopColor="#fbbf24" />
-                  </linearGradient>
-                  
-                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.05" />
-                  </linearGradient>
-
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                    <feMerge>
-                      <feMergeNode in="coloredBlur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                <motion.path
-                  d={areaPath}
-                  fill="url(#areaGradient)"
+                <motion.g
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{ duration: 1.5, delay: 1.5 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
                   viewport={{ once: true }}
-                />
+                >
+                  <rect
+                    x="320"
+                    y="15"
+                    width="70"
+                    height="35"
+                    rx="8"
+                    fill="rgba(251, 146, 60, 0.1)"
+                    stroke="#fb923c"
+                    strokeWidth="1"
+                  />
+                  <text
+                    x="355"
+                    y="28"
+                    textAnchor="middle"
+                    className="text-xs fill-orange-400 font-bold"
+                    style={{ fontFamily: "Outfit, sans-serif" }}
+                  >
+                    +{growth}%
+                  </text>
+                  <text
+                    x="355"
+                    y="42"
+                    textAnchor="middle"
+                    className="text-[9px] fill-gray-400"
+                    style={{ fontFamily: "Outfit, sans-serif" }}
+                  >
+                    Monthly revenue
+                  </text>
+                </motion.g>
 
                 <motion.path
                   ref={pathRef}
                   d={linePath}
-                  stroke="url(#lineGradient)"
-                  strokeWidth="4"
+                  stroke="#fb923c"
+                  strokeWidth="3"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  filter="url(#glow)"
                   initial={{ pathLength: 0 }}
                   whileInView={{ pathLength: 1 }}
                   transition={{ duration: 2, delay: 1, ease: "easeInOut" }}
@@ -208,10 +202,10 @@ export function Analytics() {
                       <motion.circle
                         cx={point.x}
                         cy={point.y}
-                        r={isLastPoint ? "4" : "3"}
-                        fill="white"
-                        stroke="url(#lineGradient)"
-                        strokeWidth="2"
+                        r={isLastPoint ? "6" : "3"}
+                        fill={isLastPoint ? "#fb923c" : "white"}
+                        stroke={isLastPoint ? "none" : "#fb923c"}
+                        strokeWidth={isLastPoint ? "0" : "2"}
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{
@@ -226,8 +220,8 @@ export function Analytics() {
                         onMouseLeave={() => setHoveredPoint(null)}
                         style={{
                           filter: hoveredPoint === index || isLastPoint
-                            ? "drop-shadow(0 0 12px rgba(59, 130, 246, 0.8))"
-                            : "drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))",
+                            ? "drop-shadow(0 0 12px rgba(251, 146, 60, 0.8))"
+                            : "drop-shadow(0 0 4px rgba(251, 146, 60, 0.3))",
                         }}
                       />
 
@@ -243,9 +237,9 @@ export function Analytics() {
                             y={point.y - 45}
                             width="50"
                             height="30"
-                            fill="rgba(0, 0, 0, 0.9)"
+                            fill="rgba(17, 24, 39, 0.9)"
                             rx="6"
-                            stroke="#3b82f6"
+                            stroke="#fb923c"
                             strokeWidth="1"
                           />
                           <text
@@ -261,7 +255,7 @@ export function Analytics() {
                             x={point.x}
                             y={point.y - 20}
                             textAnchor="middle"
-                            className="text-[10px] fill-cyan-400 font-bold"
+                            className="text-[10px] fill-orange-400 font-bold"
                             style={{ fontFamily: "IBM Plex Mono, monospace" }}
                           >
                             ₹{point.revenue}K
@@ -278,7 +272,7 @@ export function Analytics() {
                     x={point.x}
                     y="215"
                     textAnchor="middle"
-                    className="text-[10px] sm:text-xs fill-white"
+                    className="text-[10px] sm:text-xs fill-gray-400"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
