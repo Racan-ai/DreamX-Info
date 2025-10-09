@@ -62,13 +62,12 @@ export function Analytics() {
 
   return (
     <section
-      className="py-8 sm:py-12 lg:py-16 bg-black"
+      className="py-8 sm:py-12 lg:py-16 bg-white"
       style={{ fontFamily: "Outfit, sans-serif" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="bg-gradient-to-br from-gray-900 to-black p-4 sm:p-6 lg:p-8 w-full max-w-2xl mx-auto border border-gray-800"
-          style={{ borderRadius: '1px' }}
+          className="bg-white p-4 sm:p-6 lg:p-8 w-full max-w-2xl mx-auto border border-gray-200 rounded-lg"
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -76,7 +75,7 @@ export function Analytics() {
         >
           <div className="mb-6 sm:mb-8">
             <motion.span
-              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-900/20 text-orange-400 mb-4"
+              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-500 text-white mb-4"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -85,16 +84,16 @@ export function Analytics() {
               Success Story
             </motion.span>
             <motion.h2
-              className="text-xl sm:text-2xl font-bold text-white mb-2"
+              className="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              My journey to <span className="text-orange-400">₹{animatedRevenue}K</span>
+              My journey to <span className="text-orange-500">₹{animatedRevenue}K</span>
             </motion.h2>
             <motion.p
-              className="text-gray-400 text-sm sm:text-base"
+              className="text-gray-500 text-sm sm:text-base"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -126,14 +125,14 @@ export function Analytics() {
                       y1={200 - value * 1.8}
                       x2="400"
                       y2={200 - value * 1.8}
-                      stroke="#374151"
+                      stroke="#e5e7eb"
                       strokeWidth="1"
                     />
                     <text
                       x="25"
                       y={205 - value * 1.8}
                       textAnchor="end"
-                      className="text-[10px] sm:text-xs fill-gray-400"
+                      className="text-[10px] sm:text-xs fill-gray-500"
                       style={{ fontFamily: "Outfit, sans-serif" }}
                     >
                       {value}K
@@ -150,18 +149,18 @@ export function Analytics() {
                   <rect
                     x="320"
                     y="15"
-                    width="70"
+                    width="85"
                     height="35"
                     rx="8"
-                    fill="rgba(251, 146, 60, 0.1)"
-                    stroke="#fb923c"
+                    fill="white"
+                    stroke="#f97316"
                     strokeWidth="1"
                   />
                   <text
                     x="355"
                     y="28"
                     textAnchor="middle"
-                    className="text-xs fill-orange-400 font-bold"
+                    className="text-xs fill-orange-600 font-bold"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                   >
                     +{growth}%
@@ -170,17 +169,23 @@ export function Analytics() {
                     x="355"
                     y="42"
                     textAnchor="middle"
-                    className="text-[9px] fill-gray-400"
+                    className="text-[9px] fill-gray-500"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                   >
                     Monthly revenue
                   </text>
+                  <circle
+                    cx="365"
+                    cy="25"
+                    r="3"
+                    fill="#f97316"
+                  />
                 </motion.g>
 
                 <motion.path
                   ref={pathRef}
                   d={linePath}
-                  stroke="#fb923c"
+                  stroke="#f97316"
                   strokeWidth="3"
                   fill="none"
                   strokeLinecap="round"
@@ -193,7 +198,18 @@ export function Analytics() {
                     strokeDasharray: pathLength,
                     strokeDashoffset: pathLength,
                   }}
+                  filter="url(#glow)"
                 />
+
+                <defs>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
 
                 {dataPoints.map((point, index) => {
                   const isLastPoint = index === dataPoints.length - 1;
@@ -203,8 +219,8 @@ export function Analytics() {
                         cx={point.x}
                         cy={point.y}
                         r={isLastPoint ? "6" : "3"}
-                        fill={isLastPoint ? "#fb923c" : "white"}
-                        stroke={isLastPoint ? "none" : "#fb923c"}
+                        fill={isLastPoint ? "#f97316" : "white"}
+                        stroke={isLastPoint ? "none" : "#f97316"}
                         strokeWidth={isLastPoint ? "0" : "2"}
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
@@ -220,8 +236,8 @@ export function Analytics() {
                         onMouseLeave={() => setHoveredPoint(null)}
                         style={{
                           filter: hoveredPoint === index || isLastPoint
-                            ? "drop-shadow(0 0 12px rgba(251, 146, 60, 0.8))"
-                            : "drop-shadow(0 0 4px rgba(251, 146, 60, 0.3))",
+                            ? "drop-shadow(0 0 8px rgba(249, 115, 22, 0.6))"
+                            : "none",
                         }}
                       />
 
@@ -237,16 +253,16 @@ export function Analytics() {
                             y={point.y - 45}
                             width="50"
                             height="30"
-                            fill="rgba(17, 24, 39, 0.9)"
+                            fill="white"
                             rx="6"
-                            stroke="#fb923c"
+                            stroke="#f97316"
                             strokeWidth="1"
                           />
                           <text
                             x={point.x}
                             y={point.y - 32}
                             textAnchor="middle"
-                            className="text-[10px] fill-white"
+                            className="text-[10px] fill-gray-900"
                             style={{ fontFamily: "Outfit, sans-serif" }}
                           >
                             {point.month}
@@ -255,7 +271,7 @@ export function Analytics() {
                             x={point.x}
                             y={point.y - 20}
                             textAnchor="middle"
-                            className="text-[10px] fill-orange-400 font-bold"
+                            className="text-[10px] fill-orange-500 font-bold"
                             style={{ fontFamily: "IBM Plex Mono, monospace" }}
                           >
                             ₹{point.revenue}K
@@ -272,7 +288,7 @@ export function Analytics() {
                     x={point.x}
                     y="215"
                     textAnchor="middle"
-                    className="text-[10px] sm:text-xs fill-gray-400"
+                    className="text-[10px] sm:text-xs fill-gray-500"
                     style={{ fontFamily: "Outfit, sans-serif" }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
