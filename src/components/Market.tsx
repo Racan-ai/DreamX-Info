@@ -227,7 +227,7 @@ export function Market() {
                     repeatDelay: 3,
                   }}
                 >
-                  10k
+                  1k
                 </motion.span>
               </motion.span>
             </motion.div>
@@ -235,8 +235,7 @@ export function Market() {
               className="text-xl font-medium text-gray-900 group-hover:text-green-600 transition-colors duration-300"
               variants={itemVariants}
             >
-              Commerce collaborators to achieve goals and
-              innovations
+             1k users archive in a month on Dreamx platform
             </motion.h3>
             <motion.p
               className="text-gray-600 text-sm leading-relaxed"
