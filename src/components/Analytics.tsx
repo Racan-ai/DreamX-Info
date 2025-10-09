@@ -7,8 +7,6 @@ export function Analytics() {
   const [hoveredPoint, setHoveredPoint] = useState<number | null>(null);
   const pathRef = useRef<SVGPathElement>(null);
 
-  const growth = Math.round(((98 - 12) / 12) * 100);
-
   useEffect(() => {
     if (pathRef.current) {
       const length = pathRef.current.getTotalLength();
@@ -62,7 +60,7 @@ export function Analytics() {
 
   return (
     <section
-      className="py-8 sm:py-12 lg:py-16 bg-white"
+      className="py-8 sm:py-12 lg:py-16 bg-black"
       style={{ fontFamily: "Outfit, sans-serif" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,15 +72,6 @@ export function Analytics() {
           viewport={{ once: true }}
         >
           <div className="mb-6 sm:mb-8">
-            <motion.span
-              className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-500 text-white mb-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              Success Story
-            </motion.span>
             <motion.h2
               className="text-xl sm:text-2xl font-bold text-gray-900 mb-2"
               initial={{ opacity: 0 }}
@@ -140,47 +129,15 @@ export function Analytics() {
                   </motion.g>
                 ))}
 
-                <motion.g
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                  viewport={{ once: true }}
-                >
-                  <rect
-                    x="320"
-                    y="15"
-                    width="85"
-                    height="35"
-                    rx="8"
-                    fill="white"
-                    stroke="#f97316"
-                    strokeWidth="1"
-                  />
-                  <text
-                    x="355"
-                    y="28"
-                    textAnchor="middle"
-                    className="text-xs fill-orange-600 font-bold"
-                    style={{ fontFamily: "Outfit, sans-serif" }}
-                  >
-                    +{growth}%
-                  </text>
-                  <text
-                    x="355"
-                    y="42"
-                    textAnchor="middle"
-                    className="text-[9px] fill-gray-500"
-                    style={{ fontFamily: "Outfit, sans-serif" }}
-                  >
-                    Monthly revenue
-                  </text>
-                  <circle
-                    cx="365"
-                    cy="25"
-                    r="3"
-                    fill="#f97316"
-                  />
-                </motion.g>
+                <defs>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
 
                 <motion.path
                   ref={pathRef}
@@ -200,16 +157,6 @@ export function Analytics() {
                   }}
                   filter="url(#glow)"
                 />
-
-                <defs>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                    <feMerge>
-                      <feMergeNode in="coloredBlur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
 
                 {dataPoints.map((point, index) => {
                   const isLastPoint = index === dataPoints.length - 1;
