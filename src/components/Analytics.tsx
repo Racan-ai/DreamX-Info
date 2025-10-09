@@ -58,6 +58,15 @@ export function Analytics() {
 
   const linePath = generatePath();
 
+  const generateAreaPath = () => {
+    const basePath = generatePath();
+    const lastPoint = dataPoints[dataPoints.length - 1];
+    const firstPoint = dataPoints[0];
+    return `${basePath} L ${lastPoint.x} 200 L ${firstPoint.x} 200 Z`;
+  };
+
+  const areaPath = generateAreaPath();
+
   return (
     <section
       className="py-8 sm:py-12 lg:py-16 bg-black"
@@ -123,6 +132,11 @@ export function Analytics() {
                 ))}
 
                 <defs>
+                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#f97316" stopOpacity="0.05" />
+                  </linearGradient>
+
                   <filter id="glow">
                     <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
                     <feMerge>
@@ -131,6 +145,15 @@ export function Analytics() {
                     </feMerge>
                   </filter>
                 </defs>
+
+                <motion.path
+                  d={areaPath}
+                  fill="url(#areaGradient)"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 1.5, delay: 1.5 }}
+                  viewport={{ once: true }}
+                />
 
                 <motion.path
                   ref={pathRef}
