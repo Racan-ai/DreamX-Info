@@ -42,7 +42,8 @@ export function Analytics() {
     { month: "JUN", value: 45, revenue: 35, x: 190, y: 120 },
     { month: "JUL", value: 55, revenue: 45, x: 240, y: 100 },
     { month: "AUG", value: 65, revenue: 65, x: 290, y: 80 },
-    { month: "SEP", value: 75, revenue: 98, x: 340, y: 60 },
+    { month: "SEP", value: 70, revenue: 90, x: 340, y: 60 },
+    { month: "OCT", value: 08, revenue: 98, x: 340, y: 60 },
   ];
 
   // Generate smooth curve path
