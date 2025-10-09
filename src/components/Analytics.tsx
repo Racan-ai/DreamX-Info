@@ -37,7 +37,7 @@ export function Analytics() {
     { month: "JUN", revenue: 35, x: 190, y: 137 },
     { month: "JUL", revenue: 45, x: 240, y: 119 },
     { month: "AUG", revenue: 65, x: 290, y: 83 },
-    { month: "SEP", revenue: 90, x: 340, y: 38 },
+    { month: "SEP", revenue: 78, x: 340, y: 60 },
     { month: "OCT", revenue: 98, x: 390, y: 24 },
   ];
 
@@ -65,7 +65,8 @@ export function Analytics() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="bg-white p-4 sm:p-6 lg:p-8 w-full max-w-2xl mx-auto border border-gray-200 rounded-lg"
+          className="bg-white p-4 sm:p-6 lg:p-8 w-full max-w-2xl mx-auto border border-gray-200"
+          style={{ borderRadius: '1px' }}
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -101,7 +102,7 @@ export function Analytics() {
                 className="overflow-visible"
                 preserveAspectRatio="xMidYMid meet"
               >
-                {[0, 25, 50, 75, 100].map((value, index) => (
+                {[0, 25, 50, 75, 98].map((value, index) => (
                   <motion.g
                     key={value}
                     initial={{ opacity: 0 }}
@@ -109,14 +110,6 @@ export function Analytics() {
                     transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                     viewport={{ once: true }}
                   >
-                    <line
-                      x1="35"
-                      y1={200 - value * 1.8}
-                      x2="400"
-                      y2={200 - value * 1.8}
-                      stroke="#e5e7eb"
-                      strokeWidth="1"
-                    />
                     <text
                       x="25"
                       y={205 - value * 1.8}
